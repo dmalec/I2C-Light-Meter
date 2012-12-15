@@ -36,8 +36,8 @@
 #include "LiquidCrystal.h"
 #include "TSL2561.h"
 
-//! LCD display configured to default i2c address.
-LiquidCrystal lcd(0);
+// Connect via SPI. Data pin is #3, Clock is #2 and Latch is #4
+LiquidCrystal lcd(3, 2, 4);
 
 //! Light sensor configured to default i2c address.
 TSL2561 tsl(TSL2561_ADDR_FLOAT); 
@@ -107,5 +107,8 @@ void loop() {
 
   // Print to the LCD.
   lcd.print(output_buffer);
+  
+  // 0.5 second delay to keep the display from being unreadable in edge conditions.
+  delay(500);
 }
 
